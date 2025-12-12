@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stenoip's Santa Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
+    #map { height: 100vh; width: 100vw; }
+
+    #panel {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 280px;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(0,0,0,.3);
+    }
+
+    #panel input {
+      width: 100%;
+      padding: 6px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #blocker {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgb(150, 0, 0);
+      color: white;
+      z-index: 10000;
+      font-size: 50px;
+      text-align: center;
+      padding-top: 20vh;
+      font-weight: bold;
+    }
+
+    canvas#snow {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      width: 100vw; height: 100vh;
+      z-index: 2000;
+    }
+
+    #copyright {
+      position: fixed;
+      bottom: 5px;
+      right: 10px;
+      z-index: 9999;
+      color: white;
+      font-size: 14px;
+      text-shadow: 0 0 5px black;
+    }
+  </style>
+</head>
+<body>
+
+<!-- RED SCREEN BLOCKER -->
+<div id="blocker">
+  CHRISTMAS COUNTDOWN <br><br>
+  <span id="bigCountdown">Loading…</span>
+  <p>Return here on Christmas Eve to see the Santa Tracker</p>
+</div>
+
+<!-- INFO PANEL -->
+<div id="panel">
+  <h2>Stenoip's Santa Tracker</h2>
+
+  <p><b>Current Location:</b> <span id="loc">Loading...</span></p>
+  <p><b>Presents Delivered:</b> <span id="gifts">0</span></p>
+  <p><b>Next Stop:</b> <span id="next">Loading...</span></p>
+  <p><b>Launch Countdown:</b> <span id="count">—</span></p>
+
+  <hr style="margin:10px 0;">
+
+  <p><b>Your City:</b></p>
+  <input id="cityInput" placeholder="Enter your city…">
+  <button onclick="calculateETA()" style="margin-top:5px;width:100%;">Check Santa ETA</button>
+
+  <p><b>Santa Arrival:</b> <span id="eta">—</span></p>
+</div>
+
+<div id="map"></div>
+<canvas id="snow"></canvas>
+
+<div id="copyright">© Stenoip Company</div>
+
+<!-- MAIN SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
